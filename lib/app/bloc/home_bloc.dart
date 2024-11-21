@@ -4,7 +4,7 @@ import '../models/employee_model.dart';
 import '../services/employers_service.dart';
 
 /// States
-base class HomeState {}
+sealed class HomeState {}
 
 final class HomeStateLoading extends HomeState {}
 
