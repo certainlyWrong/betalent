@@ -15,6 +15,7 @@ dependencies:
   cupertino_icons: ^1.0.8
   flex_color_scheme: ^8.0.1
   result_dart: ^1.1.1
+  flutter_svg: ^2.0.15
 
 dev_dependencies:
   flutter_test:
@@ -28,6 +29,7 @@ flutter:
   assets:
     - assets/
 
+
   fonts:
     - family: Helvetica
       fonts:
@@ -37,8 +39,5 @@ flutter:
           style: italic
         - asset:  assets/fonts/helvetica/helvetica-light.ttf
           weight: 300
-        - asset:  assets/fonts/helvetica/Helvetica-BoldOblique.ttf
-          style: italic
-          weight: 700
         - asset: assets/fonts/helvetica/Helvetica-Bold.ttf
-          weight: 700
+          weight: 800
