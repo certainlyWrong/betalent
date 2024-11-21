@@ -84,3 +84,14 @@ sealed class AppTheme {
     fontFamily: 'Helvetica',
   );
 }
+
+sealed class BeTheme {
+  static const Color bluePrimary = Color(0xff0500FF);
+  static const Color blue100 = Color(0xffEDEFFB);
+  static const Color blackNeutral = Color(0xff1C1C1C);
+  static const Color gray20Neutral = Color(0xff9E9E9E);
+  static const Color gray10Neutral = Color(0xffDFDFDF);
+  static const Color gray5Neutral = Color(0xffF5F5F5);
+  static const Color grayNeutral = Color(0xffF0F0F0);
+  static const Color whiteNeutral = Color(0xffFFFFFF);
+}
