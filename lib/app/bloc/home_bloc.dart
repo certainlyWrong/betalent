@@ -46,7 +46,7 @@ class HomeBloc {
     _stateStream.close();
   }
 
-  fetch() {
+  void fetch() {
     _stateStream.add(HomeStateLoading());
     _employeeService.employees.then((result) {
       result.fold((success) {
@@ -59,6 +59,7 @@ class HomeBloc {
             "${DateFormat('dd/MM/yyyy').format(element.admissionDate)}",
           );
         }
+
         employees.addAll(success);
         _stateStream.add(HomeStateIdle(success));
       }, (error) {
@@ -72,7 +73,6 @@ class HomeBloc {
       log("Empty search", name: "HomeBloc");
       _stateStream.add(HomeStateIdle(employees));
     } else {
-      log("Search: $text", name: "HomeBloc");
       final result = _searchService.search(text);
       final searchResult = result.map((index) => employees[index]).toList();
       _stateStream.add(HomeStateIdle(searchResult));
