@@ -1,8 +1,8 @@
-import 'package:betalent/app/utils/dio_config.dart';
 import 'package:flutter/material.dart';
 
 import 'app/app_load_widget.dart';
 import 'app/app_widget.dart';
+import 'app/utils/dio_config.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
