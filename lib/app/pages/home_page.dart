@@ -1,15 +1,16 @@
 import 'dart:developer';
 
-import 'package:betalent/app/services/search_service.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 import '../bloc/home_bloc.dart';
-import '../datasources/mock_datasource.dart';
+import '../datasources/datasource.dart';
 import '../models/employee_model.dart';
 import '../services/employees_service.dart';
+import '../services/search_service.dart';
 import '../utils/theme.dart';
 
 class HomePage extends StatefulWidget {
@@ -23,14 +24,14 @@ class _HomePageState extends State<HomePage> {
   late final HomeBloc homeBloc;
 
   @override
-  void initState() {
-    final datasource = MockDatasource();
+  void didChangeDependencies() {
+    final DataSource datasource = Provider.of<DataSource>(context);
     final employeeService = EmployeesService(datasource);
     homeBloc = HomeBloc(
       employeeService: employeeService,
       searchService: SearchService(),
     )..fetch();
-    super.initState();
+    super.didChangeDependencies();
   }
 
   @override
