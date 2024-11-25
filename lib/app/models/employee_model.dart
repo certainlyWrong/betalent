@@ -19,7 +19,7 @@ final class EmployeeModel {
 
   factory EmployeeModel.fromMap(Map<String, dynamic> map) {
     return EmployeeModel(
-      id: map['id'],
+      id: map['id'] as int,
       name: map['name'],
       job: map['job'],
       admissionDate: DateTime.parse(map['admission_date']),
