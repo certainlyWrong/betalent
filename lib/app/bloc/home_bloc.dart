@@ -1,7 +1,11 @@
 import 'dart:async';
+import 'dart:developer';
+
+import 'package:betalent/app/services/search_service.dart';
+import 'package:intl/intl.dart';
 
 import '../models/employee_model.dart';
-import '../services/employers_service.dart';
+import '../services/employees_service.dart';
 
 /// States
 sealed class HomeState {}
@@ -21,29 +25,57 @@ final class HomeStateIdle extends HomeState {
 }
 
 class HomeBloc {
-  final _state = StreamController<HomeState>();
+  final EmployeesService _employeeService;
+  final SearchService _searchService;
 
-  final EmployersService _service;
+  final List<EmployeeModel> employees = [];
 
-  HomeBloc(
-    this._service,
-  );
+  final _stateStream = StreamController<HomeState>.broadcast();
 
-  Stream<HomeState> get state => _state.stream.asBroadcastStream();
+  HomeBloc({
+    required EmployeesService employeeService,
+    required SearchService searchService,
+  })  : _employeeService = employeeService,
+        _searchService = searchService {
+    _stateStream.add(HomeStateLoading());
+  }
+
+  Stream<HomeState> get state => _stateStream.stream;
 
   dispose() {
-    _state.close();
+    _stateStream.close();
   }
 
   fetch() {
-    _state.add(HomeStateLoading());
-
-    _service.employees.then((result) {
+    _stateStream.add(HomeStateLoading());
+    _employeeService.employees.then((result) {
       result.fold((success) {
-        _state.add(HomeStateIdle(success));
+        employees.clear();
+        _searchService.clear();
+        for (var element in success) {
+          _searchService.addSearch(
+            success.indexOf(element),
+            "${element.name} ${element.job} ${element.phone} "
+            "${DateFormat('dd/MM/yyyy').format(element.admissionDate)}",
+          );
+        }
+        employees.addAll(success);
+        _stateStream.add(HomeStateIdle(success));
       }, (error) {
-        _state.add(HomeStateError(error.message));
+        _stateStream.add(HomeStateError(error.message));
       });
     });
+  }
+
+  Future<void> search(String text) async {
+    if (text.isEmpty) {
+      log("Empty search", name: "HomeBloc");
+      _stateStream.add(HomeStateIdle(employees));
+    } else {
+      log("Search: $text", name: "HomeBloc");
+      final result = _searchService.search(text);
+      final searchResult = result.map((index) => employees[index]).toList();
+      _stateStream.add(HomeStateIdle(searchResult));
+    }
   }
 }
