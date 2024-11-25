@@ -1,3 +1,5 @@
+*-model.json
+*.g.dart
 *.lock
 
 # Miscellaneous
