@@ -22,8 +22,6 @@ class SearchService {
   List<int> search(String text) {
     text = text.toLowerCase().replaceAll(' ', '');
 
-    log("Search: $text", name: "SearchService");
-
     final result = <int>[];
     final rest = <int>[];
 
