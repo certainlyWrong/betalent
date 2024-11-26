@@ -1,11 +1,11 @@
 import 'dart:async';
 import 'dart:developer';
 
-import 'package:betalent/app/services/search_service.dart';
 import 'package:intl/intl.dart';
 
 import '../models/employee_model.dart';
 import '../services/employees_service.dart';
+import '../services/search_service.dart';
 
 /// States
 sealed class HomeState {}

@@ -1,9 +1,9 @@
-import 'package:betalent/app/datasources/datasource.dart';
-import 'package:betalent/app/datasources/mock_datasource.dart';
-import 'package:betalent/app/datasources/remote_datasource.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'datasources/datasource.dart';
+import 'datasources/mock_datasource.dart';
+import 'datasources/remote_datasource.dart';
 import 'pages/home_page.dart';
 import 'utils/theme.dart';
 
