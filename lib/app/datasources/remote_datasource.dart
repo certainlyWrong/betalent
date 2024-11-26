@@ -1,7 +1,7 @@
-import 'package:betalent/app/utils/dio_config.dart';
 import 'package:result_dart/result_dart.dart';
 
 import '../models/employee_model.dart';
+import '../utils/dio_config.dart';
 import 'datasource.dart';
 
 class RemoteDataSource implements DataSource {
