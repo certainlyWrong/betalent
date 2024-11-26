@@ -38,22 +38,18 @@ final options = CacheOptions(
 final dio = Dio()..interceptors.add(DioCacheInterceptor(options: options));
 
 Future<(Response<dynamic> response, bool isCache)> fetchData(String url) async {
-  try {
-    final response = await dio.get(
-      url,
-    );
+  final response = await dio.get(
+    url,
+  );
 
-    final isCache = response.extra[CacheResponse.cacheKey] != null;
-    if (isCache) {
-      // Cache hit
-      log('Fetched data from cache for $url', name: 'dio_cache');
-    } else {
-      // Network response
-      log('Fetched data from server for $url', name: 'dio_cache');
-    }
-
-    return (response, isCache);
-  } on DioException catch (e) {
-    throw Exception('Error fetching data: ${e.message}');
+  final isCache = response.extra[CacheResponse.cacheKey] != null;
+  if (isCache) {
+    // Cache hit
+    log('Fetched data from cache for $url', name: 'dio_cache');
+  } else {
+    // Network response
+    log('Fetched data from server for $url', name: 'dio_cache');
   }
+
+  return (response, isCache);
 }
