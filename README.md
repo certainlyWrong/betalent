@@ -1,16 +1,26 @@
-# betalent
+# BeTalent
 
-A new Flutter project.
+Embora o visual e o código do projeto já possam oferecer uma boa perspectiva, é importante dedicar um momento para refletir sobre os acontecimentos durante o desenvolvimento. Isso permitirá uma compreensão mais ampla do processo.
 
-## Getting Started
+Em primeiro lugar, não foquei tanto na interface, que certamente poderia ser mais refinada. Meu principal objetivo foi priorizar a funcionalidade, e mesmo assim não consegui implementar tudo o que havia planejado. A ideia inicial era realizar uma pesquisa semântica localmente, mas, apesar de ter sido uma experiência interessante, os resultados não foram satisfatórios. Cheguei a considerar o uso da API do Google para esse propósito, mas ao avaliar a complexidade envolvida, decidi seguir por um caminho mais simples, que resultou no modelo de pesquisa atual.
 
-This project is a starting point for a Flutter application.
+Gostaria de destacar que meu objetivo principal é sempre explorar coisas novas. Independentemente dos resultados das avaliações, o aprendizado adquirido ao longo do teste é lucro para mim.
 
-A few resources to get you started if this is your first Flutter project:
+## Uma visão geral da interface
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+<div align="center" width=95%>
+    <img src="doc/images/screenshot4.png" width=40%>
+    <img src="doc/images/screenshot1.png" width=40%>
+    <img src="doc/images/screenshot2.png" width=40%>
+    <img src="doc/images/screenshot3.png" width=40%>
+</div>
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Coisas legais para se observar
+
+- **DataSource**: O Bloc que controla a HomePage em algum nível usa um DataSource que pode ser remoto ou um mock local. Isso permite que a interface seja testada sem a necessidade de uma conexão com o servidor.
+
+- **Arquitetura**: Um MVC. Precisa de um Clean Architecture? Jamais, quem gosta de overengineering é vampiro (brincadeira, eu gosto)
+
+- **Cache**: O cache é feito de forma simples, mas eficaz. A maioria das rotas GET é armazenada em cache, e o cache é temporário.
+
+- **Fastlane**: Desculpem a decepção, mas fiquei sem minutos para usar o gitactions, então deixei o setup inicial mesmo.
