@@ -21,7 +21,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late final HomeBloc homeBloc;
+  HomeBloc? homeBloc;
 
   @override
   void didChangeDependencies() {
@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void dispose() {
-    homeBloc.dispose();
+    homeBloc?.dispose();
     super.dispose();
   }
 
@@ -115,7 +115,7 @@ class _HomePageState extends State<HomePage> {
                         hintText: "Pesquisar",
                         onSubmitted: (value) {
                           log(value);
-                          homeBloc.search(value);
+                          homeBloc?.search(value);
                         },
                       ),
                     ),
@@ -174,7 +174,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                     StreamBuilder(
-                      stream: homeBloc.state,
+                      stream: homeBloc?.state,
                       builder: (context, snapshot) {
                         if (snapshot.connectionState ==
                             ConnectionState.waiting) {
