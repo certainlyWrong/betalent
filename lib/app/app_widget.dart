@@ -1,3 +1,4 @@
+import 'package:betalent/app/datasources/datasource.dart';
 import 'package:betalent/app/datasources/mock_datasource.dart';
 import 'package:betalent/app/datasources/remote_datasource.dart';
 import 'package:flutter/material.dart';
@@ -23,10 +24,22 @@ class _AppWidgetState extends State<AppWidget> {
     return Provider(
       create: (_) => widget.isConnect ? RemoteDataSource() : MockDatasource(),
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         theme: AppTheme.light,
         darkTheme: AppTheme.dark,
         themeMode: ThemeMode.light,
-        home: const HomePage(),
+        home: Consumer<DataSource>(builder: (context, dataSource, _) {
+          return Banner(
+            location: BannerLocation.bottomStart,
+            color: BeTheme.bluePrimary,
+            message: switch (dataSource) {
+              MockDatasource() => 'Mock',
+              RemoteDataSource() => 'Remote',
+              _ => 'Unknown',
+            },
+            child: const HomePage(),
+          );
+        }),
       ),
     );
   }
