@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
 import 'app/app_load_widget.dart';
@@ -11,10 +12,14 @@ void main() async {
   /// Simulate a delay to check the server
   await Future.delayed(const Duration(seconds: 3));
 
-  final (response, isCache) = await fetchData("http://localhost:5555/hello");
-  if (response.statusCode == 200) {
-    runApp(const AppWidget(isConnect: true));
-  } else {
+  try {
+    final (response, isCache) = await fetchData("http://localhost:5555/hello");
+    if (response.statusCode == 200) {
+      runApp(const AppWidget(isConnect: true));
+    } else {
+      runApp(const AppWidget(isConnect: false));
+    }
+  } on DioException catch (_) {
     runApp(const AppWidget(isConnect: false));
   }
 }
